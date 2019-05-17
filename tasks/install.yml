@@ -13,10 +13,23 @@
     backup_duplicity_pkg: "{{ backup_duplicity_pkg }}={{ backup_duplicity_version }}"
   when: backup_duplicity_version
 
-- name: Install core dependencies
+- name: Install cron dependencies
   apt:
     name:
       - cron
+    state: present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+-  name: Install cron dependencies
+   apt:
+     name:
+       - cronie
+     state: present
+   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red HatEnterprise Linux'
+
+- name: Install core dependencies
+  apt:
+    name:
       - gzip
       - duply
       - "{{ backup_duplicity_pkg }}"
