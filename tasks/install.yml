@@ -21,14 +21,14 @@
   when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
 
 -  name: Install cron dependencies
-   apt:
+   package:
      name:
        - cronie
      state: present
    when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red HatEnterprise Linux'
 
 - name: Install core dependencies
-  apt:
+  package:
     name:
       - gzip
       - duply
